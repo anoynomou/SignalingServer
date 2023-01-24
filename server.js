@@ -1,8 +1,9 @@
 var express = require("express")
 var App = express()
-var PORT = 3000 || process.env.PORT
+var PORT = 80 || process.env.PORT
 var cors = require("cors")
 var bodyParser = require("body-parser")
+var path = require("path")
 
 App.use(bodyParser.json({ type: 'application/*+json' }))
 App.use(cors())
@@ -14,7 +15,7 @@ var http = require("http").createServer(App).listen(PORT,()=>{
 })
 var io = require("socket.io")(http,{cors:{origin:"*"}})
 App.get("/",(req,res)=>{
-    res.status(201).send("This is a Signaling Server")
+    res.sendFile(path.join(__dirname,"views","document.html"))
 })
 
 
